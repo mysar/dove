@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="im.yan.modules.dorm.dao.DxDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="im.yan.modules.dorm.entity.DxEntity" id="dxMap">
+        <result property="openid" column="openid"/>
+        <result property="xh" column="xh"/>
+        <result property="ssh" column="ssh"/>
+    </resultMap>
+
+    <select id="getList" resultType="im.yan.modules.dorm.entity.DxEntity">
+        select * from tb_xs_pl
+    </select>
+
+    <select id="findExist" parameterType="string" resultType="im.yan.modules.dorm.entity.DxEntity">
+        select * from tb_xs_pl where xh = #{xh}
+    </select>
+
+    <select id="getCount" resultType="im.yan.modules.dorm.entity.DxEntity">
+        select * from tb_xs_pl
+    </select>
+
+
+
+
+</mapper>

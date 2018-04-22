@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="im.yan.modules.dorm.dao.DormDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="im.yan.modules.dorm.entity.DormEntity" id="dormMap">
+        <result property="dormId" column="dorm_id"/>
+        <result property="ssh" column="ssh"/>
+        <result property="type" column="type"/>
+        <result property="rnrs" column="rnrs"/>
+        <result property="rzrs" column="rzrs"/>
+        <result property="hzrs" column="hzrs"/>
+    </resultMap>
+
+    <select id="getListForBoy" resultType="im.yan.modules.dorm.entity.DormEntity">
+        select * from tb_dorm ORDER by rzrs DESC
+    </select>
+
+    <select id="getListForGirl" resultType="im.yan.modules.dorm.entity.DormEntity">
+        select * from tb_dorm where type = 0
+    </select>
+
+    <select id="getListForBlank" resultType="im.yan.modules.dorm.entity.DormEntity">
+        select * from tb_dorm where type = 2
+    </select>
+
+
+</mapper>

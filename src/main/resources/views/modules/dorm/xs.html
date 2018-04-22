@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="../../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../../css/font-awesome.min.css">
+    <link rel="stylesheet" href="../../plugins/jqgrid/ui.jqgrid-bootstrap.css">
+    <link rel="stylesheet" href="../../plugins/ztree/css/metroStyle/metroStyle.css">
+    <link rel="stylesheet" href="../../css/main.css">
+    <script src="../../libs/jquery.min.js"></script>
+    <script src="../../plugins/layer/layer.js"></script>
+    <script src="../../libs/bootstrap.min.js"></script>
+    <script src="../../libs/vue.min.js"></script>
+    <script src="../../plugins/jqgrid/grid.locale-cn.js"></script>
+    <script src="../../plugins/jqgrid/jquery.jqGrid.min.js"></script>
+    <script src="../../plugins/ztree/jquery.ztree.all.min.js"></script>
+    <script src="../../js/common.js"></script>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a v-if="hasPermission('dorm:xs:save')" class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a v-if="hasPermission('dorm:xs:update')" class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a v-if="hasPermission('dorm:xs:delete')" class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+            <a v-if="hasPermission('dorm:xs:zd')" class="btn btn-primary" @click="zd"><i class="fa fa-refresh"></i>&nbsp;自动分配</a>
+            <a v-if="hasPermission('dorm:xs:qxzd')" class="btn btn-primary" @click="qxzd"><i class="fa fa-refresh"></i>&nbsp;取消分配</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">学号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="xs.xh" placeholder="学号(唯一不可重复)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">姓名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="xs.xm" placeholder="姓名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">宿舍号</div>
+                <div class="col-sm-10">
+                    <input id="disabledInput" type="text" class="form-control" v-model="xs.dormId"
+                           placeholder="宿舍号(默认不填)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">性别</div>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" value="1" v-model="xs.sex"/> 男
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sex" value="0" v-model="xs.sex"/> 女
+                </label>
+            </div>
+
+            <div class="form-group">
+                <div class="col-sm-2 control-label">是否入住</div>
+                <label class="radio-inline">
+                    <input type="radio" name="sfrz" value="1" v-model="xs.sfrz"/> 是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sfrz" value="0" v-model="xs.sfrz"/> 否
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">是否少数民族</div>
+                <label class="radio-inline">
+                    <input type="radio" name="sfssmz" value="1" v-model="xs.sfssmz"/> 是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="sfssmz" value="0" v-model="xs.sfssmz"/> 否
+                </label>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="../../js/modules/dorm/xs.js"></script>
+</body>
+</html>

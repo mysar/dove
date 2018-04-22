@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="im.yan.modules.footer.dao.TabClassDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="im.yan.modules.footer.entity.TabClassEntity" id="tabClassMap">
+        <result property="openid" column="openid"/>
+        <result property="name" column="name"/>
+        <result property="classroom" column="classroom"/>
+        <result property="enable" column="enable"/>
+        <result property="grade" column="grade"/>
+    </resultMap>
+
+
+</mapper>
